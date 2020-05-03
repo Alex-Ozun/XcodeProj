@@ -6,6 +6,9 @@ public final class XCWorkspace: Writable, Equatable {
     /// Workspace data
     public var data: XCWorkspaceData
 
+    /// Shared data.
+    public var sharedData: XCSharedData?
+    
     // MARK: - Init
 
     /// Initializes the workspace with the path where the workspace is.
@@ -24,6 +27,8 @@ public final class XCWorkspace: Writable, Equatable {
         } else {
             try self.init(data: XCWorkspaceData(path: xcworkspaceDataPaths.first!))
         }
+        let sharedDataPath = path + "xcshareddata"
+        self.sharedData = try? XCSharedData(path: sharedDataPath)
     }
 
     /// Initializes a default workspace with a single reference that points to self:
